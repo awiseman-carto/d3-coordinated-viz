@@ -22,7 +22,7 @@ function callback(error, csvData, states){
   var newState = topojson.feature(states, states.objects.state_province).features;
     console.log("error",error);
     console.log("csv",csvData);
-    console.log("states",states);
+    //console.log("states",states);
     //console.log(tracts);
 };
 console.log("done")
