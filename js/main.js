@@ -57,11 +57,11 @@ function setMap(){
       console.log("waiting")
       d3.queue()
         .defer(d3.csv, "data/tractdata2.csv") //load attributes from csv
-        .defer(d3.json, "data/state_province.topojson") //load choropleth spatial data
+//
         .defer(d3.json, "data/temp.topojson") //load choropleth spatial data
         .await(callback);
 
-  function callback(error, csvData, states, tracts){
+  function callback(error, csvData, tracts){
     console.log("callback")
 
       //place graticule on the map
