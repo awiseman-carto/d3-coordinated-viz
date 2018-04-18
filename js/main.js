@@ -41,7 +41,7 @@ function setMap(){
       .attr("width", width)
       .attr("height", height);
 
-    //create Albers equal area conic projection centered on France
+    //create Albers equal area conic projection centered on Washington, DC
   var projection = d3.geoAlbers()
         .center([17.1, 38.88])
         //38, -95  or 0, 46.2
@@ -54,21 +54,19 @@ function setMap(){
       .projection(projection);
 
   //use queue to parallelize asynchronous data loading
-      console.log("waiting")
+      //console.log("waiting")
       d3.queue()
         .defer(d3.csv, "data/tractdata2.csv") //load attributes from csv
-//
         .defer(d3.json, "data/temp.topojson") //load choropleth spatial data
         .await(callback);
 
   function callback(error, csvData, tracts){
-    console.log("callback")
+    //console.log("callback")
 
       //place graticule on the map
       setGraticule(map, path);
 
     // translate to topojosn
-    //var newState = topojson.feature(states, states.objects.state_province).features;
     var census = topojson.feature(tracts, tracts.objects.temp).features;
 
       // join the csv
@@ -122,7 +120,7 @@ function setChart(csvData, colorScale){
           .range([458, 0])
           .domain([0, 7436]);
 
-      //Example 2.4 line 8...set bars for each province
+      //Example 2.4 line 8...set bars for each tract
 
       var bars = chart.selectAll(".bar")
           .data(csvData)
@@ -235,6 +233,7 @@ function changeAttribute(attribute, csvData){
          })
          .duration(400);
 
+         // update the chart
      updateChart(bars, csvData.length, colorScale, expressed);
 }; // end of changeAttribute
 
@@ -256,8 +255,8 @@ function updateChart(bars, n, colorScale, expressed){
             return choropleth(d, colorScale);
         })
 
-    //at the bottom of updateChart()...add text to chart title
-    console.log("updatechart")
+    //add text to chart title
+    //console.log("updatechart")
     var chartTitle = d3.select(".chartTitle")
         .text(expressed + " population per census tract");
     // console.log(expressed[3])
@@ -273,6 +272,7 @@ function updateChart(bars, n, colorScale, expressed){
 //function to create color scale generator
 function makeColorScale(data){
     var colorClasses = [
+      // I tried a bunch of options
       /*
         "#D4B9DA",
         "#C994C7",
@@ -292,7 +292,7 @@ function makeColorScale(data){
       "#fd8d3c",
       "#f03b20",
       "#bd0026" */
-
+      // brown/oranges
       "#ffffd4",
       "#fed98e",
       "#fe9929",
@@ -325,15 +325,17 @@ function highlight(props){
        .style("stroke-width", "3")
        .style("stroke-linecap", "round");
   setLabel(props)
+  //console.log(props)
 };
 
 //};
 
+// mostly just creates the backgrounds here
 function setGraticule(map, path){
 
     //create graticules
     var graticule = d3.geoGraticule()
-      .step([5, 5]); //place graticule lines every 5 degrees of longitude and latitude
+      //.step([1, 1]); //place graticule lines every 5 degrees of longitude and latitude
     //create graticule lines
 
     //create graticule background
@@ -379,7 +381,7 @@ function joinData(census, csvData){
 
 function setEnumerationUnits(census, map, path, colorScale){
 
-//in setEnumerationUnits()...add France regions to map
+//in setEnumerationUnits()...add tracts to map
    var tracts = map.selectAll(".tracts")
        .data(census)
        .enter()
@@ -430,7 +432,10 @@ function dehighlight(props){
 //function to create dynamic label
 function setLabel(props){
     //label content
-    var labelAttribute = "<h1>" + props[expressed].toLocaleString() +
+    // for some reason when i mouseover the bar it sends over a string instead of numbers
+    // this block turns it into a number
+    var newNum = props[expressed]*1
+    var labelAttribute = "<h1>" + newNum.toLocaleString() +
         "</h1><br><b>" + expressed + " Population</b>";
 
     //create info label div
@@ -440,8 +445,8 @@ function setLabel(props){
         .attr("id", props.TRACT + "_label")
         .html(labelAttribute);
         var newTract = props.TRACT
+        // this gets rid the first 5 letters of the tract number , which are all "tract"
         var cutTract = "Census Tract " + newTract.substring(5,10)
-
     var regionName = infolabel.append("div")
         .attr("class", "labelname")
         .html(cutTract)
@@ -487,7 +492,7 @@ function choropleth(props, colorScale){
 
 })();
 
-// trying conic
+// trying conic, failing
 /*
     var projection = d3.geoConicConformal()
     .parallels([38 + 18 / 60, 39 + 27 / 60])
@@ -495,7 +500,7 @@ function choropleth(props, colorScale){
 //    .fitExtent([[20, 20], [940, 440]])
     .rotate([77, 0]);
 */
-// trying state plane
+// trying state plane,  failing
 
 /*    var projection = d3.geoTransverseMercator()
         .rotate([74 + 30 / 60, -38 - 50 / 60]);
