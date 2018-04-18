@@ -1,20 +1,217 @@
 /* Stylesheet by Andrew Wiseman, 2018 */
 
+body {
+  background-color: #ccc;
+}
+
+h1{
+    font-family: 'adelle';
+    margin: 20px 0 0 0;
+}
+
+p {
+    font-family: 'adelle';
+    margin: 10px 0 0 0;
+}
+
+/* unvisited link */
+a:link {
+    color: gray;
+}
+
+/* visited link */
+a:visited {
+    color: #888;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+img {
+    max-width: 100%;
+    height: 40px;
+}
+
 .title {
-    font-family: sans-serif;
+    font-family: 'adelle';
     font-size: 1.5em;
     font-weight: bold;
+}
+
+/*.map {
+    border: medium solid #999;
+    margin: 10px 0 0 20px;
+}*/
+
+.map {
+    margin: 0 0 0 20px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 125px;
+    left: 30px;
+    z-index: 10;
+    font-family: "adelle";
+    font-size: 1em;
+    font-weight: bold;
+    padding: 2px;
+    border: 1px solid #999;
+    box-shadow: 12px 12px 14px #999;
+}
+
+.dropdown-content{
+  background-color: #f9f9f9
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
+
+select option {
+  background: #eee;
+  color: #111;
+  box-shadow: inset 20px 20px #111;
+  font-family: "adelle";
+}
+
+select option:hover {
+  color: #111;
+  box-shadow: inset 20px 20px #111;
+  font-family: "adelle";
+}
+
+option {
+    font-weight: normal;
+    background-color: #f9f9f9;
+    font-family: "adelle";
+}
+
+#instructions {
+    font-family: "adelle";
+    font-size: 0.8em;
+    position: absolute;
+    top: 340px;
+    left: 30px;
+    max-width: 200px;
+    color: #555;
+}
+
+#bar-instructions {
+    font-family: "adelle";
+    font-size: 0.8em;
+    position: absolute;
+    top: 125px;
+    left: 670px;
+    max-width: 120px;
+}
+
+.infolabel {
+    position: absolute;
+    height: 75px;
+    min-width: 100px;
+    color: #C70039 ;
+    background-color: #fff;
+    border: solid thin #C70039 ;
+    padding: 5px 10px;
+    top: -175px;
+    font-family: "adelle";
+    background: rgba(255, 255, 255, 0.85);
+}
+
+.infolabel h1 {
+    margin: 0 20px 0 0;
+    padding: 0;
+    display: inline-block;
+    line-height: 1em;
+    font-family: "adelle";
+}
+
+.chart {
+    float: right;
+    margin: 7px 20px 0 0;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    font-family: "adelle";
+}
+
+.dropdown-content a {
+    font-family: "adelle";
+}
+
+select {
+      font-family: "adelle";
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.chartTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: "adelle";
+}
+
+.chartBackground {
+    fill: #ccc;
+}
+
+.chartFrame {
+    fill: none;
+    shape-rendering: crispEdges;
 }
 
 .axis path,
 .axis line {
     fill: none;
-    stroke: black;
+    stroke: #999;
+    fill: #999
     stroke-width: 1px;
     shape-rendering: crispEdges;
 }
 
 .axis text {
-    font-family: sans-serif;
-    font-size: 0.9em;
+     font-family: "adelle";
+    font-size: 1em;
+    fill: #999;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #999;
+    stroke-width: 1px;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: "adelle";
+    font-size: 1.1em;
+    fill: #666;
+}
+
+.regions {
+    fill: #aaa;
+    stroke: #CCC;
+    stroke-width: 0.5px;
+}
+
+.tracts {
+    fill: #aaa;
+    stroke: #CCC;
+    stroke-width: 0.5px;
+}
+
+.gratLines {
+    fill: none;
+    stroke: #eee;
+    stroke-width: 1px;
+}
+
+.gratBackground {
+    fill: #ccc;
 }
